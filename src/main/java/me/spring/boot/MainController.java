@@ -1,5 +1,8 @@
 package me.spring.boot;
 
+import me.spring.boot.user.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class MainController {
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/")
     public String hello() {
         return "hello";
+    }
+
+    @RequestMapping("/greeting")
+    public String greet() {
+        return userService.getMessage();
     }
 }
