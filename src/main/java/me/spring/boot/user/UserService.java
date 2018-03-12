@@ -17,17 +17,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ApplicationArguments arguments;
-
     public UserRepository getUserRepository() {
         return userRepository;
     }
 
     public String getMessage() {
-        List<String> helloValues = arguments.getOptionValues("hello");
-
-        return helloValues.stream().collect(Collectors.joining(", "));
+        return "Hello World";
     }
 
 
