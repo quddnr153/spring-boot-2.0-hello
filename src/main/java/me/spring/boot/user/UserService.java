@@ -1,6 +1,10 @@
 package me.spring.boot.user;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,11 +17,18 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ApplicationArguments arguments;
+
     public UserRepository getUserRepository() {
         return userRepository;
     }
 
     public String getMessage() {
-        return "Spring boot 2.0";
+        List<String> helloValues = arguments.getOptionValues("hello");
+
+        return helloValues.stream().collect(Collectors.joining(", "));
     }
+
+
 }
