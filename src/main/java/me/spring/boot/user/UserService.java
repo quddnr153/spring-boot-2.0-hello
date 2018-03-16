@@ -15,6 +15,9 @@ public class UserService {
     private String name;
 
     @Autowired
+    private Bw bw;
+
+    @Autowired
     private UserRepository userRepository;
 
     public UserRepository getUserRepository() {
@@ -22,7 +25,10 @@ public class UserService {
     }
 
     public String getMessage() {
-        return "Hello World, " + name;
+        System.out.println(bw.getTime());
+        System.out.println(bw.getWhereToGo());
+        System.out.println(bw.getMilliSec().getNano());
+        return "Hello World, " + name + ", bw " + bw.getWhereToGo() + " " + bw.getTime();
     }
 
 
