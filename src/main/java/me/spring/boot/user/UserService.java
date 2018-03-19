@@ -18,6 +18,9 @@ public class UserService {
     private Bw bw;
 
     @Autowired
+    private MyBean myBean;
+
+    @Autowired
     private UserRepository userRepository;
 
     public UserRepository getUserRepository() {
@@ -28,6 +31,7 @@ public class UserService {
         System.out.println(bw.getTime());
         System.out.println(bw.getWhereToGo());
         System.out.println(bw.getMilliSec().getNano());
+        System.out.println("Bean profile : " + myBean.getMessage());
         return "Hello World, " + name + ", bw " + bw.getWhereToGo() + " " + bw.getTime();
     }
 
