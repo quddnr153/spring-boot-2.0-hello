@@ -26,12 +26,12 @@ public class UserController {
 	 *
 	 * @return view
 	 */
-	@RequestMapping("/")
-	public String index() {
-		converters.forEach(c -> c.getConverters().forEach(e -> System.out.println(e.getClass())));
-
-		return "Hello";
-	}
+//	@RequestMapping("/")
+//	public String index() {
+//		converters.forEach(c -> c.getConverters().forEach(e -> System.out.println(e.getClass())));
+//
+//		return "Hello";
+//	}
 
 	@GetMapping("/user")
 	public User currentUser() {
