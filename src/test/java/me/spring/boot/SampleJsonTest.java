@@ -1,14 +1,15 @@
 package me.spring.boot;
 
+import me.spring.boot.user.User;
+
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 
@@ -17,11 +18,20 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
  * quddnr153@gmail.com
  * https://github.com/quddnr153
  */
-@RunWith(SpringRunner.class)
-@JsonTest
 public class SampleJsonTest {
-	@Autowired
-	JacksonTester<Sample> json;
+	JacksonTester<Sample> sampleJsonTester;
+
+	JacksonTester<User> userJsonTester;
+
+	@Before
+	public void setUp() {
+		JacksonTester.initFields(this, new ObjectMapper());
+	}
+
+	@Test
+	public void jacksonTestIsNotNull() {
+		assertThat(userJsonTester).isNotNull();
+	}
 
 	@Test
 	public void jsonTest() throws IOException {
@@ -29,7 +39,7 @@ public class SampleJsonTest {
 		sample.setName("BW");
 		sample.setNumber(100);
 
-		JsonContent<Sample> sampleJsonContent = json.write(sample);
+		JsonContent<Sample> sampleJsonContent = sampleJsonTester.write(sample);
 
 		assertThat(sampleJsonContent)
 				.hasJsonPathStringValue("@.name")
