@@ -1,4 +1,4 @@
-package me.spring.boot.jpa;
+package me.spring.boot;
 
 import java.util.Date;
 
@@ -17,22 +17,16 @@ public class DefaultDataPopulator implements ApplicationRunner {
 	@Autowired
 	MeetingRepository meetingRepository;
 
-	@Autowired
-	PersonRepository personRepository;
-
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		Person person = new Person();
-		person.setEmail("quddnr153@gmail.com");
-		person.setName("bw");
-		person.setJoined(new Date());
-		personRepository.save(person);
-
-		System.out.println(personRepository.findByEmail(person.getEmail()));
-
 		Meeting meeting = new Meeting();
 		meeting.setTitle("New Meeting");
-		meeting.setLocation("Suwon");
+		meeting.setStartAt(new Date());
 		meetingRepository.save(meeting);
+
+		meetingRepository.findAll().forEach(meeeting -> {
+			System.out.println("============");
+			System.out.println(meeeting.getTitle() + " " + meeeting.getStartAt());
+		});
 	}
 }
